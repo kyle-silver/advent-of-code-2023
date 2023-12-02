@@ -51,4 +51,5 @@ fn part1() {
 fn part2() {
     let ans: u32 = INPUT.lines().map(calibration_value_part2).sum();
     println!("Day 1, part 2: {ans}");
+    assert_eq!(54094, ans)
 }
