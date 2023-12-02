@@ -14,28 +14,23 @@ fn calibration_value_part2(input: &str) -> u32 {
 }
 
 fn extract_digits(input: &str) -> Vec<u32> {
+    // you'd think a regex would be the right solution here, but it actually
+    // isn't!! it doesn't work!! the number words can overlap!!!
+    let chars: Vec<_> = input.chars().collect();
     let mut matches = vec![];
     for i in 0..input.len() {
-        let substr: String = input.chars().skip(i).take(5).collect();
-        if substr.starts_with("1") || substr.starts_with("one") {
-            matches.push(1);
-        } else if substr.starts_with("2") || substr.starts_with("two") {
-            matches.push(2);
-        } else if substr.starts_with("3") || substr.starts_with("three") {
-            matches.push(3);
-        } else if substr.starts_with("4") || substr.starts_with("four") {
-            matches.push(4);
-        } else if substr.starts_with("5") || substr.starts_with("five") {
-            matches.push(5);
-        } else if substr.starts_with("6") || substr.starts_with("six") {
-            matches.push(6);
-        } else if substr.starts_with("7") || substr.starts_with("seven") {
-            matches.push(7);
-        } else if substr.starts_with("8") || substr.starts_with("eight") {
-            matches.push(8);
-        } else if substr.starts_with("9") || substr.starts_with("nine") {
-            matches.push(9);
-        }
+        match &chars[i..] {
+            ['1', ..] | ['o', 'n', 'e', ..] => matches.push(1),
+            ['2', ..] | ['t', 'w', 'o', ..] => matches.push(2),
+            ['3', ..] | ['t', 'h', 'r', 'e', 'e', ..] => matches.push(3),
+            ['4', ..] | ['f', 'o', 'u', 'r', ..] => matches.push(4),
+            ['5', ..] | ['f', 'i', 'v', 'e', ..] => matches.push(5),
+            ['6', ..] | ['s', 'i', 'x', ..] => matches.push(6),
+            ['7', ..] | ['s', 'e', 'v', 'e', 'n', ..] => matches.push(7),
+            ['8', ..] | ['e', 'i', 'g', 'h', 't', ..] => matches.push(8),
+            ['9', ..] | ['n', 'i', 'n', 'e', ..] => matches.push(9),
+            _ => {}
+        };
     }
     matches
 }
