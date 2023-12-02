@@ -80,7 +80,8 @@ fn part1() {
         .filter(Game::possible)
         .map(|game| game.id)
         .sum();
-    println!("{ans}")
+    println!("Day 2, part 1: {ans}");
+    assert_eq!(2156, ans);
 }
 
 #[test]
@@ -90,5 +91,6 @@ fn part2() {
         .filter_map(Game::parse)
         .map(|g| g.power())
         .sum();
-    println!("{ans}")
+    println!("Day 2, part 2: {ans}");
+    assert_eq!(66909, ans);
 }
