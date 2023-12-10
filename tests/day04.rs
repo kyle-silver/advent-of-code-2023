@@ -66,14 +66,24 @@ fn part2() {
 
     // keep track of how many copies of each card we've won
     let mut counts = vec![0; cards.len()];
+
+    // an active list of which cards we still need to evaluate; we start with
+    // one copy of each card
     let mut buffer: VecDeque<_> = (0..cards.len()).collect();
+
+    // iterate through our cards until we have none left to evaluate
     while let Some(id) = buffer.pop_front() {
+        // each time we see a card, we update our count
         counts[id] += 1;
+
+        // add all of the new cards we've won to the buffer
         for (match_number, _) in matches[id].iter().enumerate() {
             let next_card_id = id + match_number + 1;
             buffer.push_back(next_card_id);
         }
     }
+
+    // count up how many cards we've won after we've gone through all of them
     let ans: u32 = counts.iter().sum();
     println!("Day 4, part 2: {ans}");
     assert_eq!(11024379, ans);
